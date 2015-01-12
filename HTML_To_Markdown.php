@@ -248,9 +248,11 @@ class HTML_To_Markdown
                 break;
             case "ol":
             case "ul":
+            case "dl":
                 $markdown = $value . PHP_EOL;
                 break;
             case "li":
+            case "dd":
                 $markdown = $this->convert_list($node);
                 break;
             case "img":
@@ -410,7 +412,7 @@ class HTML_To_Markdown
         $list_type = $node->parentNode->nodeName;
         $value = $node->nodeValue;
 
-        if ($list_type == "ul") {
+        if ($list_type == "ul" || $list_type == "dl") {
             $markdown = "- " . trim($value) . PHP_EOL;
         } else {
             $number = $this->get_position($node);
